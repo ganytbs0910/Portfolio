@@ -1,3 +1,4 @@
+/* Base styles */
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
@@ -8,6 +9,7 @@ body {
     flex-direction: column;
 }
 
+/* Header styles */
 header {
     background-color: #333;
     color: #fff;
@@ -30,13 +32,82 @@ nav ul li a {
     text-decoration: none;
 }
 
+/* Main content styles */
 main {
     flex: 1;
     padding: 2rem;
     padding-bottom: 4rem;
-    /* フッターとの間に余白を追加 */
 }
 
+section {
+    margin-bottom: 2rem;
+}
+
+/* Profile styles */
+#profile {
+    background-color: #f9f9f9;
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.profile-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-text h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.profile-text p {
+    margin: 0.5rem 0;
+}
+
+/* Responsive design for profile */
+@media (max-width: 768px) {
+    .profile-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-image {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Work history styles */
+.job {
+    background-color: #f9f9f9;
+    border-left: 4px solid #333;
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
+
+.job h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.job-period {
+    font-style: italic;
+    color: #666;
+}
+
+.job-description {
+    margin-bottom: 0;
+}
+
+/* App styles */
 .app {
     background-color: #f4f4f4;
     border-radius: 5px;
@@ -44,6 +115,36 @@ main {
     margin-bottom: 1rem;
 }
 
+.app-link {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+}
+
+.app-link:hover {
+    background-color: #45a049;
+}
+
+.app-icon {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Contact form styles */
 form {
     display: flex;
     flex-direction: column;
@@ -55,23 +156,6 @@ label,
 input,
 textarea {
     margin-bottom: 1rem;
-}
-
-button {
-    background-color: #333;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 1rem;
-    margin-top: auto;
-    /* フッターを下部に押し下げる */
 }
 
 button[type="submit"] {
@@ -86,4 +170,13 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
     background-color: #45a049;
+}
+
+/* Footer styles */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
 }
