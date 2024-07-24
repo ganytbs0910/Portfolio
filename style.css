@@ -3,6 +3,9 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
@@ -28,7 +31,10 @@ nav ul li a {
 }
 
 main {
+    flex: 1;
     padding: 2rem;
+    padding-bottom: 4rem;
+    /* フッターとの間に余白を追加 */
 }
 
 .app {
@@ -64,7 +70,20 @@ footer {
     color: #fff;
     text-align: center;
     padding: 1rem;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+    margin-top: auto;
+    /* フッターを下部に押し下げる */
+}
+
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
 }

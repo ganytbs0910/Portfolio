@@ -5,12 +5,20 @@ document.getElementById('contact-form').addEventListener('submit', function (e) 
     var email = document.getElementById('email').value;
     var message = document.getElementById('message').value;
 
-    // ここでフォームデータを送信する処理を実装します
-    // 例: サーバーへのAjaxリクエストなど
-
-    console.log('送信されたデータ:', { name, email, message });
-    alert('お問い合わせありがとうございます。メッセージが送信されました。');
-
-    // フォームをリセット
-    this.reset();
+    fetch('/send-email', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, message }),
+    })
+        .then(response => response.text())
+        .then(data => {
+            alert(data);
+            this.reset();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert('エラーが発生しました。もう一度お試しください。');
+        });
 });
