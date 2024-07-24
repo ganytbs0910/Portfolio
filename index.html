@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>開発者ポートフォリオ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>開発者ポートフォリオ</h1>
+        <nav>
+            <ul>
+                <li><a href="#apps">リリースしたアプリ</a></li>
+                <li><a href="#contact">お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="apps">
+            <h2>リリースしたアプリ</h2>
+            <div class="app">
+                <h3>ゾンビゲーム</h3>
+                <p>とにかく生き残れ！</p>
+                <a href="https://apps.apple.com/jp/app/zombi-%E3%81%A8%E3%81%AB%E3%81%8B%E3%81%8F%E7%94%9F%E3%81%8D%E6%AE%8B%E3%82%8C/id1622768462"
+                    target="_blank">App Storeでダウンロード</a>
+            </div>
+            <div class="app">
+                <h3>カードゲーム</h3>
+                <p>楽しいカードゲーム！</p>
+                <a href="#" target="_blank">近日公開</a>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>お問い合わせ</h2>
+            <form id="contact-form">
+                <label for="name">お名前:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">メールアドレス:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">メッセージ:</label>
+                <textarea id="message" name="message" required></textarea>
+
+                <button type="submit">送信</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 開発者ポートフォリオ. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
