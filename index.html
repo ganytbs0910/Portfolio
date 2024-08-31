@@ -26,7 +26,7 @@
         <section id="profile">
             <h2><i class="fas fa-user"></i>プロフィール</h2>
             <div class="profile-content">
-                <img src="Images/icon.jpg" class="profile-image">
+                <img src="Images/ProfileIcon.jpg" class="profile-image">
                 <div class="profile-text">
                     <h3>中西皓紀</h3>
                     <p><i class="fas fa-birthday-cake"></i>2002年生まれ</p>
@@ -52,7 +52,7 @@
                 </article>
                 <article class="job">
                     <h3><i class="fas fa-building"></i>株式会社Astran</h3>
-                    <p class="job-period"><i class="far fa-calendar-alt"></i>2024年6月 〜 2024年8月</p>
+                    <p class="job-period"><i class="far fa-calendar-alt"></i>2024年6月 〜 2024年8月現在</p>
                     <p class="job-description"><i class="fas fa-tasks"></i>英単語学習の対戦型アプリを開発</p>
                 </article>
             </div>
@@ -92,6 +92,18 @@
 
                 <button type="submit">送信</button>
             </form>
+        </section>
+        <section id="jpeg-compression">
+            <h2><i class="fas fa-compress"></i>JPEG圧縮ツール</h2>
+            <div class="compression-tool">
+                <input type="file" id="image-input" accept="image/jpeg">
+                <button id="compress-button">圧縮</button>
+                <div id="result">
+                    <p>元のサイズ: <span id="original-size"></span></p>
+                    <p>圧縮後のサイズ: <span id="compressed-size"></span></p>
+                    <a id="download-link" style="display: none;">圧縮画像をダウンロード</a>
+                </div>
+            </div>
         </section>
     </main>
 
