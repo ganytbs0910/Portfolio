@@ -25,31 +25,83 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     });
 
-    // JPEG compression
+    // JPEG圧縮の処理
     const imageInput = document.getElementById('image-input');
     const compressButton = document.getElementById('compress-button');
-    const originalSizeSpan = document.getElementById('original-size');
-    const compressedSizeSpan = document.getElementById('compressed-size');
-    const downloadLink = document.getElementById('download-link');
+    const compressionResults = document.getElementById('compression-results');
 
     compressButton.addEventListener('click', async function () {
-        const file = imageInput.files[0];
-        if (!file) {
+        const files = imageInput.files;
+        if (files.length === 0) {
             alert('画像を選択してください。');
             return;
         }
 
-        originalSizeSpan.textContent = `${(file.size / 1024).toFixed(2)} KB`;
+        compressionResults.innerHTML = '';
+        const resultsContainer = document.createElement('div');
+        resultsContainer.className = 'results-container';
+        compressionResults.appendChild(resultsContainer);
 
-        const compressedImage = await compressImage(file);
-        compressedSizeSpan.textContent = `${(compressedImage.size / 1024).toFixed(2)} KB`;
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            if (!file.type.includes('jpeg') && !file.type.includes('jpg')) {
+                continue;
+            }
 
-        const url = URL.createObjectURL(compressedImage);
-        downloadLink.href = url;
-        downloadLink.download = 'compressed_' + file.name;
-        downloadLink.style.display = 'inline';
+            const resultDiv = document.createElement('div');
+            resultDiv.className = 'image-result';
+            resultsContainer.appendChild(resultDiv);
+
+            // プログレスバーの作成
+            const progressBar = document.createElement('div');
+            progressBar.className = 'progress-bar';
+            const progress = document.createElement('div');
+            progress.className = 'progress';
+            progressBar.appendChild(progress);
+            resultDiv.appendChild(progressBar);
+
+            // ファイル名の表示
+            const fileName = document.createElement('p');
+            fileName.textContent = `ファイル: ${file.name}`;
+            resultDiv.appendChild(fileName);
+
+            // 元のサイズを表示
+            const originalSize = document.createElement('p');
+            originalSize.textContent = `元のサイズ: ${(file.size / 1024).toFixed(2)} KB`;
+            resultDiv.appendChild(originalSize);
+
+            try {
+                // 圧縮処理
+                progress.style.width = '50%';
+                const compressedImage = await compressImage(file);
+                progress.style.width = '100%';
+
+                // 圧縮後のサイズを表示
+                const compressedSize = document.createElement('p');
+                compressedSize.textContent = `圧縮後のサイズ: ${(compressedImage.size / 1024).toFixed(2)} KB`;
+                resultDiv.appendChild(compressedSize);
+
+                // プレビュー画像の表示
+                const preview = document.createElement('img');
+                preview.className = 'image-preview';
+                preview.src = URL.createObjectURL(compressedImage);
+                resultDiv.appendChild(preview);
+
+                // ダウンロードリンク
+                const downloadLink = document.createElement('a');
+                downloadLink.href = URL.createObjectURL(compressedImage);
+                downloadLink.download = 'compressed_' + file.name;
+                downloadLink.className = 'download-link';
+                downloadLink.textContent = 'ダウンロード';
+                resultDiv.appendChild(downloadLink);
+
+            } catch (error) {
+                resultDiv.innerHTML += `<p style="color: red;">エラー: ${file.name} の処理に失敗しました。</p>`;
+            }
+        }
     });
 
+    // 圧縮関数
     async function compressImage(file) {
         return new Promise((resolve) => {
             const reader = new FileReader();
@@ -93,47 +145,83 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // WebP to PNG conversion
+    // WebP変換の処理
     const webpInput = document.getElementById('webp-input');
     const convertButton = document.getElementById('convert-button');
-    const webpOriginalSizeSpan = document.getElementById('webp-original-size');
-    const pngSizeSpan = document.getElementById('png-size');
-    const pngDownloadLink = document.getElementById('png-download-link');
-    const previewContainer = document.getElementById('preview-container');
-    const previewImage = document.getElementById('preview-image');
+    const conversionResults = document.getElementById('conversion-results');
 
-    convertButton.addEventListener('click', async function() {
-        const file = webpInput.files[0];
-        if (!file) {
+    convertButton.addEventListener('click', async function () {
+        const files = webpInput.files;
+        if (files.length === 0) {
             alert('WebP画像を選択してください。');
             return;
         }
 
-        if (!file.type.includes('webp')) {
-            alert('WebP形式の画像を選択してください。');
-            return;
-        }
+        conversionResults.innerHTML = '';
+        const resultsContainer = document.createElement('div');
+        resultsContainer.className = 'results-container';
+        conversionResults.appendChild(resultsContainer);
 
-        webpOriginalSizeSpan.textContent = `${(file.size / 1024).toFixed(2)} KB`;
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            if (!file.type.includes('webp')) {
+                continue;
+            }
 
-        try {
-            const convertedImage = await convertWebPtoPNG(file);
-            pngSizeSpan.textContent = `${(convertedImage.size / 1024).toFixed(2)} KB`;
+            const resultDiv = document.createElement('div');
+            resultDiv.className = 'image-result';
+            resultsContainer.appendChild(resultDiv);
 
-            const url = URL.createObjectURL(convertedImage);
-            pngDownloadLink.href = url;
-            pngDownloadLink.download = file.name.replace('.webp', '.png');
-            pngDownloadLink.style.display = 'inline';
+            // プログレスバーの作成
+            const progressBar = document.createElement('div');
+            progressBar.className = 'progress-bar';
+            const progress = document.createElement('div');
+            progress.className = 'progress';
+            progressBar.appendChild(progress);
+            resultDiv.appendChild(progressBar);
 
-            // プレビューを表示
-            previewImage.src = url;
-            previewContainer.style.display = 'block';
-        } catch (error) {
-            console.error('変換エラー:', error);
-            alert('画像の変換中にエラーが発生しました。');
+            // ファイル名の表示
+            const fileName = document.createElement('p');
+            fileName.textContent = `ファイル: ${file.name}`;
+            resultDiv.appendChild(fileName);
+
+            // 元のサイズを表示
+            const originalSize = document.createElement('p');
+            originalSize.textContent = `元のサイズ: ${(file.size / 1024).toFixed(2)} KB`;
+            resultDiv.appendChild(originalSize);
+
+            try {
+                // 変換処理
+                progress.style.width = '50%';
+                const convertedImage = await convertWebPtoPNG(file);
+                progress.style.width = '100%';
+
+                // 変換後のサイズを表示
+                const convertedSize = document.createElement('p');
+                convertedSize.textContent = `変換後のサイズ: ${(convertedImage.size / 1024).toFixed(2)} KB`;
+                resultDiv.appendChild(convertedSize);
+
+                // プレビュー画像の表示
+                const preview = document.createElement('img');
+                preview.className = 'image-preview';
+                preview.src = URL.createObjectURL(convertedImage);
+                resultDiv.appendChild(preview);
+
+                // ダウンロードリンク
+                const downloadLink = document.createElement('a');
+                downloadLink.href = URL.createObjectURL(convertedImage);
+                downloadLink.download = file.name.replace('.webp', '.png');
+                downloadLink.className = 'download-link';
+                downloadLink.textContent = 'ダウンロード';
+                resultDiv.appendChild(downloadLink);
+
+            } catch (error) {
+                resultDiv.innerHTML += `<p style="color: red;">エラー: ${file.name} の処理に失敗しました。</p>`;
+            }
         }
     });
 
+    // WebPからPNGへの変換関数
     async function convertWebPtoPNG(file) {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
