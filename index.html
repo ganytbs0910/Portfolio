@@ -78,6 +78,36 @@
             </div>
         </section>
 
+        <section id="jpeg-compression">
+            <h2><i class="fas fa-compress"></i>JPEG圧縮ツール</h2>
+            <div class="compression-tool">
+                <input type="file" id="image-input" accept="image/jpeg">
+                <button id="compress-button">圧縮</button>
+                <div id="result">
+                    <p>元のサイズ: <span id="original-size"></span></p>
+                    <p>圧縮後のサイズ: <span id="compressed-size"></span></p>
+                    <a id="download-link" style="display: none;">圧縮画像をダウンロード</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="webp-converter">
+            <h2><i class="fas fa-exchange-alt"></i>WebP → PNG変換ツール</h2>
+            <div class="converter-tool">
+                <input type="file" id="webp-input" accept="image/webp">
+                <button id="convert-button">変換</button>
+                <div id="webp-result">
+                    <p>元のサイズ: <span id="webp-original-size"></span></p>
+                    <p>変換後のサイズ: <span id="png-size"></span></p>
+                    <div id="preview-container" style="display: none;">
+                        <h3>プレビュー</h3>
+                        <img id="preview-image" alt="変換後のプレビュー">
+                    </div>
+                    <a id="png-download-link" style="display: none;">PNG画像をダウンロード</a>
+                </div>
+            </div>
+        </section>
+
         <section id="contact">
             <h2><i class="fas fa-envelope"></i>お問い合わせ</h2>
             <form id="contact-form">
@@ -92,18 +122,6 @@
 
                 <button type="submit">送信</button>
             </form>
-        </section>
-        <section id="jpeg-compression">
-            <h2><i class="fas fa-compress"></i>JPEG圧縮ツール</h2>
-            <div class="compression-tool">
-                <input type="file" id="image-input" accept="image/jpeg">
-                <button id="compress-button">圧縮</button>
-                <div id="result">
-                    <p>元のサイズ: <span id="original-size"></span></p>
-                    <p>圧縮後のサイズ: <span id="compressed-size"></span></p>
-                    <a id="download-link" style="display: none;">圧縮画像をダウンロード</a>
-                </div>
-            </div>
         </section>
     </main>
 

@@ -191,6 +191,65 @@ h2 .far {
     background-color: #007B9A;
 }
 
+/* WebP Converter styles */
+#webp-converter {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+.converter-tool {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+#convert-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#convert-button:hover {
+    background-color: #45a049;
+}
+
+#webp-result {
+    margin-top: 20px;
+    width: 100%;
+}
+
+#preview-container {
+    margin: 20px 0;
+    max-width: 100%;
+}
+
+#preview-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#png-download-link {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #008CBA;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+#png-download-link:hover {
+    background-color: #007B9A;
+}
+
 /* Contact form styles */
 form {
     display: flex;
@@ -203,6 +262,17 @@ label,
 input,
 textarea {
     margin-bottom: 1rem;
+}
+
+input,
+textarea {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+textarea {
+    min-height: 150px;
 }
 
 button[type="submit"] {
@@ -237,5 +307,19 @@ footer {
 
     .profile-image {
         margin-bottom: 1rem;
+    }
+
+    /* レスポンシブ対応のための追加スタイル */
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    .app-list {
+        grid-template-columns: 1fr;
+    }
+
+    form {
+        padding: 0 1rem;
     }
 }

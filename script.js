@@ -92,4 +92,70 @@ document.addEventListener('DOMContentLoaded', function () {
             reader.readAsDataURL(file);
         });
     }
+
+    // WebP to PNG conversion
+    const webpInput = document.getElementById('webp-input');
+    const convertButton = document.getElementById('convert-button');
+    const webpOriginalSizeSpan = document.getElementById('webp-original-size');
+    const pngSizeSpan = document.getElementById('png-size');
+    const pngDownloadLink = document.getElementById('png-download-link');
+    const previewContainer = document.getElementById('preview-container');
+    const previewImage = document.getElementById('preview-image');
+
+    convertButton.addEventListener('click', async function() {
+        const file = webpInput.files[0];
+        if (!file) {
+            alert('WebP画像を選択してください。');
+            return;
+        }
+
+        if (!file.type.includes('webp')) {
+            alert('WebP形式の画像を選択してください。');
+            return;
+        }
+
+        webpOriginalSizeSpan.textContent = `${(file.size / 1024).toFixed(2)} KB`;
+
+        try {
+            const convertedImage = await convertWebPtoPNG(file);
+            pngSizeSpan.textContent = `${(convertedImage.size / 1024).toFixed(2)} KB`;
+
+            const url = URL.createObjectURL(convertedImage);
+            pngDownloadLink.href = url;
+            pngDownloadLink.download = file.name.replace('.webp', '.png');
+            pngDownloadLink.style.display = 'inline';
+
+            // プレビューを表示
+            previewImage.src = url;
+            previewContainer.style.display = 'block';
+        } catch (error) {
+            console.error('変換エラー:', error);
+            alert('画像の変換中にエラーが発生しました。');
+        }
+    });
+
+    async function convertWebPtoPNG(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0);
+
+                    canvas.toBlob((blob) => {
+                        resolve(blob);
+                    }, 'image/png');
+                };
+                img.onerror = reject;
+                img.src = e.target.result;
+            };
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+    }
 });
