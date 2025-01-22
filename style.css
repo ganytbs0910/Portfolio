@@ -274,6 +274,28 @@ h2 .far {
     background-color: #007B9A;
 }
 
+/* Contact styles */
+.contact-info {
+    max-width: 500px;
+    margin: 0 auto 2rem;
+    padding: 1rem;
+    background-color: var(--bg-light);
+    border-radius: 4px;
+}
+
+.contact-info p {
+    margin: 0;
+}
+
+.contact-info a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
 /* Contact form styles */
 form {
     display: flex;
